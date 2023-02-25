@@ -367,7 +367,7 @@ yy.Select = class Select {
 			// the (data, err) standard is maintained here.
 			var res1 = queryfn(query, oldscope, function (res, err) {
 				if (err) {
-					return cb(err, null);
+					return cb(null, err); // Fixed bug, error returning as data!
 				}
 				if (query.rownums.length > 0) {
 					for (var i = 0, ilen = res.length; i < ilen; i++) {

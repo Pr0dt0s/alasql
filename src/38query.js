@@ -134,7 +134,16 @@ function queryfn3(query) {
 
 	// Start walking over data
 	//console.log(142,'1111');
-	doJoin(query, scope, h);
+	try {
+		doJoin(query, scope, h);
+	} catch (error) {
+		if(query.cb) {
+			query.cb(null, error);
+			return;
+		} else {
+			throw error;
+		}
+	}
 	//console.log(144,'2222',query.modifier);
 
 	//console.log(85,query.data[0]);

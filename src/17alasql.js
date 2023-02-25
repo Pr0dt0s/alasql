@@ -258,7 +258,17 @@ alasql.dexec = function (databaseid, sql, params, cb, scope) {
 	}
 
 	// Create AST
-	var ast = alasql.parse(sql);
+	var ast
+	try {
+		ast = alasql.parse(sql);
+	} catch (error) {
+		if (cb) {
+			cb(null,error);
+			return;
+		} else {
+			throw error;
+		}
+	}
 	if (!ast.statements) {
 		return;
 	}
